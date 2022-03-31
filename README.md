@@ -37,6 +37,8 @@ Repeat Actions (Making new Feature, merging with Development)
     -git merge [new-feature]
 
 7. Push updates to repo
+    - git add .
+    - git commit -m "something not in chinese"
     -git push origin Development
 
 8. Submit pull request (feature --> Development)
