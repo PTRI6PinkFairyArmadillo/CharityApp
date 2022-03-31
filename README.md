@@ -11,6 +11,7 @@ STYLE RULES:
 _______________________________
 Git Feature Submission Process
 _______________________________
+Initial Setup
 1. Create Organization and Repository (DONE)
 2. Initialize Master & Dev Branches (DONE)
     -Master is ONLY for production!
@@ -22,15 +23,19 @@ _______________________________
     -git checkout Development
     -git pull origin Development (pulls updates in Development that others may have made, do this BEFORE merging your feature)
     -git checkout [your-name/new-feature]
-    -git merge Development
     -resolve conflicts as needed
 
-5. Make updates and commit your branch 
+Repeat Actions (Making new Feature, merging with Development)
+5. Create new branches off dev to build new features
+    - git checkout -b [your name/new feature]
+
+6. Make updates and commit your branch 
     -git commit -m [comments] 
     -this won't affect Development branch yet
-
-6. Create new branches off dev to build new features
-    - git checkout -b [your name/new feature]
+    -git checkout Development
+    -git pull origin Development (pulls updates into Development that others may have made, do this BEFORE merging your feature)
+    -git checkout [your-name/new-feature]
+    -git merge Development
 
 7. Push updates to repo
     -git push origin [your-name/new-feature]
