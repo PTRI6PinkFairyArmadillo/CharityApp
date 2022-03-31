@@ -34,11 +34,10 @@ Repeat Actions (Making new Feature, merging with Development)
     -this won't affect Development branch yet
     -git checkout Development
     -git pull origin Development (pulls updates into Development that others may have made, do this BEFORE merging your feature)
-    -git checkout [your-name/new-feature]
-    -git merge Development
+    -git merge [new-feature]
 
 7. Push updates to repo
-    -git push origin [your-name/new-feature]
+    -git push origin Development
 
 8. Submit pull request (feature --> Development)
     -navigate to your feature branch
