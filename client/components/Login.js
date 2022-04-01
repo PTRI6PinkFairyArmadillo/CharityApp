@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dashboard from './containers/Dashboard'
+import Dashboard from '../containers/Dashboard.js'
 
 class Login extends Component {
     render(){
