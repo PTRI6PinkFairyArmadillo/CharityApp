@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+const mapDispatchToProps = dispatch => ({
+
+});
+
+const mapStateToProps = state => ({
+
+});
+
 class Dashboard extends Component {
     
     render(){
@@ -11,5 +19,5 @@ class Dashboard extends Component {
         )
     }
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default Dashboard
+// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
