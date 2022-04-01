@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import Login from './components/Login'
+import Login from './Login.js'
 
-class Signup extends React.Component {
+class Signup extends Component {
     render(){
         return(
             <div>

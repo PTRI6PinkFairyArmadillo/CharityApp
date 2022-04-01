@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-app.use('/loginSignUp', userRouter);
-app.use('/dashboard', dashboardRouter);
+// app.use('/loginSignUp', userRouter);
+// app.use('/dashboard', dashboardRouter);
 
 //bank connection endpoint
 //charity dashboard endpoint (might need separate for charity api)
