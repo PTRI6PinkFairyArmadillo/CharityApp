@@ -9,6 +9,6 @@ render() {
             <h1>App.jsx signup child</h1>
             <Signup />
         </div>
-    )
-};
+        )
+    };
 }
