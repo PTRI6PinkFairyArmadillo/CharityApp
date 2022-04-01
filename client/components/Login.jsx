@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Dashboard from './containers/Dashboard'
 
-class Login extends React.Component {
+class Login extends Component {
     render(){
         return(
             <div>

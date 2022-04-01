@@ -4,6 +4,7 @@
   "description": "",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "nodemon server/server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\" \"nodemon server/server.js\""
   },
@@ -19,9 +20,12 @@
   },
   "homepage": "https://github.com/PTRI6PinkFairyArmadillo/CharityApp#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
     "nodemon": "^2.0.15",
+    "pg": "^8.7.3",
+    "postgres": "^3.0.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-redux": "^7.2.6"
