@@ -1,20 +1,22 @@
 const db = require('../models/charityModels');
 const path = require('path');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 const userController = {};
+const SALT_WORK_FACTOR = 8;
 
 userController.createUser = (req, res, next) => {
   //assume we get username and password from req.body
   //assume that password has been encrypted
   //possible storing more info about the user - first name last name DOB 
-  const { fName, lName, username, password } = req.body;
+  const { fName, lName, username, plainPassword } = req.body;
 
   const newUser = [
     fName,
     lName,
     username,
-    password
   ];
 
   const query = `
@@ -31,75 +33,74 @@ userController.createUser = (req, res, next) => {
     $1,
     $2,
     $3,
-    crypt($4, gen_salt('md5'))
+    $4
   )
   `;
- 
 
-  db.query(query, newUser, (error, response) => {
-    if (error) {
-      return next({
-        //log error
-      })
-    }
-    return next();
+  bcrypt.hash(plainPassword, SALT_WORK_FACTOR, (err, hash) => {
+    newUser.push(hash);
+    console.log(newUser);
+    db.query(query, newUser, (error, response) => {
+      if (error) {
+        return next({
+          //log error
+        })
+      }
+      console.log(response.rows);
+      return next();
+    });
   });
 };
 
 userController.verifyUser = (req, res, next) => {
-	const { username, password } = req.body;
-  
+  const { username, plainPassword } = req.body;
+
   //check if username and password is empty
-  
+
   const query = `
 		SELECT
 		*
 		FROM
 		public.users
     WHERE
-    username = $1 AND
-    password = crypt($2, gen_salt('md5'))
+    username = $1 
 	`;
 
-//verify password matches password in database
-  db.query(query, [username, password], (error, response) => {
-      if (error) {
-          return next({
-              //error msg
-          });
-      };
-
-      if (!response.rows.length) return next({
-        log: `userController.verifyUser: ERROR: No username found`,
+  //verify password matches password in database
+  db.query(query, [username], (error, response) => {
+    if (error) {
+      return next({
+        //error msg
       });
+    };
 
-      //check response password against password associated w/ provided username
-      console.log(response.rows);
-      // if (response.rows[0].password === crypt(password, gen_salt('md5'))) return next();
-      
-      return next();
+    if (!response.rows.length) return next({
+      log: `userController.verifyUser: ERROR: No username found`,
+    });
 
-      //bcrypt compare
-      // bcrypt.compare(response.rows[0].password, password, (err, res) => {
-      //   if (err) {
-      //       return next({
-      //           err,
-      //           message: 'Error in VERIFY USER bcrypt.compare'
-      //       })
-      //   }
-      //   if (res) {
-      //       return next();
-      //   } else {
-      //       return next({
-      //           err,
-      //           message: 'Invalid Password'
-      //       })
-      //   }
-      // })
+    bcrypt.compare(plainPassword, response.rows[0].password, (err, passMatch) => {
+      if (err) {
+        return next({
+          err,
+          message: 'Error in VERIFY USER bcrypt.compare'
+        })
+      }
+      if (passMatch) {
+        const accessToken = jwt.sign(response.rows[0]._id, process.env.ACCESS_TOKEN_SECRET);
+        res.locals.userInfo = response.rows[0];
+        res.locals.userInfo.accessToken = accessToken;
+        return next();
+      }
+      else {
+        return next({
+          err,
+          message: 'Invalid Password'
+        })
+      }
+    })
+  });
+};
 
-      });
-  };
-  
 
 
 userController.signoutUser = (req, res, next) => {
