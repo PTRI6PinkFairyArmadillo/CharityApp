@@ -46,7 +46,6 @@ userController.createUser = (req, res, next) => {
           //log error
         })
       }
-      console.log(response.rows);
       return next();
     });
   });
@@ -54,7 +53,6 @@ userController.createUser = (req, res, next) => {
 
 userController.verifyUser = (req, res, next) => {
   const { username, plainPassword } = req.body;
-
   //check if username and password is empty
 
   const query = `
