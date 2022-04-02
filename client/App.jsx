@@ -6,7 +6,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogginActive: true
+      isLogginActive: true,
+      loggedIn: false,
     };
   }
 
@@ -37,10 +38,10 @@ class App extends Component {
         <div className="login">
           <div className="container" ref={ref => (this.container = ref)}>
             {isLogginActive && (
-              <Login containerRef={ref => (this.current = ref)} />
+              <Login containerRef={ref => (this.current = ref)}/>
             )}
             {!isLogginActive && (
-              <Signup containerRef={ref => (this.current = ref)} />
+              <Signup containerRef={ref => (this.current = ref)}/>
             )}
           </div>
           <RightSide

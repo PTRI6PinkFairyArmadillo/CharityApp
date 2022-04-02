@@ -58,7 +58,7 @@ userController.verifyUser = (req, res, next) => {
 		public.users
     WHERE
     username = $1 AND
-    password = crypt($2, gen_salt('md5'))
+    password = crypt($2, password)
 	`;
 
 //verify password matches password in database
