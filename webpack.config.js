@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const webpack = require('webpack')
 
 const output = {
   path: path.resolve(__dirname, 'build'),
@@ -14,10 +15,17 @@ const entry = [
 module.exports = {
   mode: process.env.NODE_ENV,
   entry,
-  output,
+  output: {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: "[name].js",
+    sourceMapFilename: "[name].js.map"
+  },
+  devtool: false,
   plugins: [new HtmlWebpackPlugin({
     template: './client/index.html'
-  })],
+  }),
+  new webpack.SourceMapDevToolPlugin({filename: '[file].map[query]'})],
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
@@ -46,15 +54,21 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
+        test: /.(css|scss)$/,
+        use: ['style-loader','css-loader','sass-loader'],
+      },
+      {
+        test: /\.(gif|png|jpe?g|svg)$/i,
         use: [
-          "style-loader",
-          "css-loader",
+          "file-loader",
+          {
+            loader: 'image-webpack-loader'
+          }
         ],
       },
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx','scss','jpg','png','css']
   },
 };

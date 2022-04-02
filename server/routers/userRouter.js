@@ -3,7 +3,7 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 
 router.post('/login', userController.verifyUser, (req, res) => {
-  return res.status(200).send('success');
+  return res.status(200).json(res.locals.userInfo);
 });
 
 router.post('/signup', userController.createUser, (req, res) => {
