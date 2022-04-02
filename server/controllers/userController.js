@@ -35,7 +35,7 @@ userController.createUser = (req, res, next) => {
   )
   `;
  
-
+// git 
   db.query(query, newUser, (error, response) => {
     if (error) {
       return next({
@@ -49,8 +49,7 @@ userController.createUser = (req, res, next) => {
 userController.verifyUser = (req, res, next) => {
 	const { username, password } = req.body;
   
-  //check if username and password is empty
-  
+  //check provided password against stored hash. Need to use stored hash as salt be
   const query = `
 		SELECT
 		*
@@ -58,7 +57,7 @@ userController.verifyUser = (req, res, next) => {
 		public.users
     WHERE
     username = $1 AND
-    password = crypt($2, gen_salt('md5'))
+    password = crypt($2, password)
 	`;
 
 //verify password matches password in database
