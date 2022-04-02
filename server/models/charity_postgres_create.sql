@@ -18,7 +18,11 @@ CREATE EXTENSION pgcrypto;
 
 CREATE TABLE public.charities (
     "_id" serial PRIMARY KEY,
-    "name" varchar NOT NULL
+    "name" varchar NOT NULL,
+    "city" varchar NOT NULL,
+    "country" varchar NOT NULL,
+    "logoURL" varchar NOT NULL,
+    "url" varchar NOT NULL,
 );
 CREATE TABLE public.users (
     "_id" serial PRIMARY KEY,
@@ -32,8 +36,15 @@ CREATE TABLE public.bank_accounts (
     "account_number" varchar NOT NULL,
     "bank_name" varchar NOT NULL
 );
+
+-- JOIN TABLES
 CREATE TABLE public.user_bank_accounts (
     "_id" serial PRIMARY KEY,
     "user_id" bigint NOT NULL,
     "bank_account_id" bigint NOT NULL
+);
+CREATE TABLE public.user_favorited_charities (
+    "_id" serial PRIMARY KEY,
+    "user_id" bigint NOT NULL,
+    "charity_id" bigint NOT NULL
 );
