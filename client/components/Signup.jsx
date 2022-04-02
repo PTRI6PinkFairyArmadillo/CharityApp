@@ -20,8 +20,9 @@ export class Signup extends Component {
               <input type="text" name="username" placeholder="username" />
             </div>
             <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input type="text" name="email" placeholder="email" />
+              <label htmlFor="firstName">Name</label>
+              <input type="text" name="firstName" placeholder="firstName" />
+              <input type="text" name="lastName" placeholder="lastName" />
             </div>
             <div className="form-group">
               <label htmlFor="password">Password</label>
