@@ -34,7 +34,6 @@ class App extends Component {
     const current = isLogginActive ? "Signup" : "Login";
     const currentActive = isLogginActive ? "login" : "register";
     return (
-<<<<<<< HEAD
       <div className="App">
         <div className="login">
           <div className="container" ref={ref => (this.container = ref)}>
@@ -51,10 +50,6 @@ class App extends Component {
             containerRef={ref => (this.rightSide = ref)}
             onClick={this.changeState.bind(this)}
           />
-=======
-        <div> 
-            <Signup />
->>>>>>> FrontendMilos
         </div>
       </div>
     );
