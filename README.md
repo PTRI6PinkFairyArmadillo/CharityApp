@@ -1,6 +1,12 @@
 # CharityApp
+: {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: "[name].js",
+    sourceMapFilename: "[name].js.map"
+  }
 
-
+"source-map"
 
 
 STYLE RULES:
