@@ -1,17 +1,27 @@
 const path = require('path');
-
 const express = require('express');
 const bodyParser = require('body-parser');
+const userRouter = require('./routers/userRouter.js');
+const dashboardRouter = require('./routers/dashboardRouter.js');
 const port = 3001;
 
-const app = express()
+const app = express();
 
-app.use(bodyParser.json())
+app.use(express.json());
+app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
 
+app.use('/loginSignUp', userRouter);
+// app.use('/dashboard', dashboardRouter);
 
+//bank connection endpoint
+//charity dashboard endpoint (might need separate for charity api)
+
+
+//404 handler
+app.use((req, res) => res.sendStatus(404));
 
 //global error handler
 app.use((err, req, res, next) => {
