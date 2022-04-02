@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/PTRI6PinkFairyArmadillo/CharityApp#readme",
   "dependencies": {
+    "analog-clock-react": "^1.3.0",
     "bcryptjs": "^2.4.3",
     "concurrently": "^7.0.0",
     "cross-env": "^7.0.3",
@@ -29,7 +30,10 @@
     "pg": "^8.7.3",
     "postgres": "^3.0.2",
     "react": "^16.8.3",
+    "react-calendar": "^3.7.0",
+    "react-collapsible": "^2.8.4",
     "react-dom": "^16.8.3",
+    "react-google-charts": "^4.0.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.3.0",
     "reactjs-popup": "^2.0.5",
