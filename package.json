@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
     "pg": "^8.7.3",
+    "plaid": "^10.2.0",
     "postgres": "^3.0.2",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
