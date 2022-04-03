@@ -124,3 +124,17 @@
     color: rgb(255, 192, 206);
     background-color: #4f4f4f;
   }
+
+  .signout {
+    padding: 5px 20px;
+    margin: 5px 5px 15px 5px;
+    background-color: #4f4f4f;
+    color: rgb(255, 192, 206);
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .signout:hover {
+    color: rgb(255, 192, 206);
+    background-color: rgb(255, 192, 206);
+  }

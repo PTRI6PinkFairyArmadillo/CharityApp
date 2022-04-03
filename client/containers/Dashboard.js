@@ -13,6 +13,8 @@ import 'react-calendar/dist/Calendar.css';
 import donate from '../public/donate.png';
 import { Chart } from "react-google-charts";
 
+//fetch data
+
 const AddBank = () => (
     <div>
       <h2>Add Bank</h2>
@@ -125,6 +127,18 @@ class Dashboard extends Component {
 			this.setState({ ytd: "none" })
 			this.setState({ total: "none" })
 	    }
+
+      signOut(e) {
+        fetch('/loginSignUp/signout', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'}
+        })
+        .then(res => {
+            window.location.href = "http://localhost:8080/logIn"
+        })
+        .catch(err => console.log('handleLogin: ERROR: ',err))
+    }
+
     render(){
         return(
             <div className="dashboardBackground">
@@ -132,7 +146,7 @@ class Dashboard extends Component {
                 <div className="one">
        
                 <div className="chart">
-                    <div className="chartNav"><button className="buttonNav"  onClick={this.changeTotal}>total</button><button className="buttonNav" onClick={this.changeYtd}>ytd</button><button className="buttonNav" onClick={this.changeMonth}>month</button></div>
+                    <div className="chartNav"><button className="buttonNav"  onClick={this.changeTotal}>total</button><button className="buttonNav" onClick={this.changeYtd}>ytd</button><button className="buttonNav" onClick={this.changeMonth}>month</button><button className="signout" onClick={(e) => this.signOut(e)}>signout</button></div>
                     
                     <div className="total" style={{display: this.state.total}}>
                     <Chart
@@ -184,12 +198,12 @@ class Dashboard extends Component {
                 <div className="donate"><img src={donate} alt="donate"/></div>
                 </div>
                 <div className="two">
- 
+                
                 <div className="clock"><AnalogClock {...options} /></div>
                 <div className = "calendar"><Calendar/></div>
                 </div>
                 <div>
-                <Router>
+                
                     <div>
                         <Popup
                         modal
@@ -201,12 +215,8 @@ class Dashboard extends Component {
                         {close => <Menu close={close} />}
                         </Popup>
 
-                        <Routes>
-                        <Route path="/addBank" component={AddBank} />
-                        <Route path="/contributions" component={Contributions} />
-                        </Routes>
                     </div>
-                    </Router>
+               
                 </div>
             </div>
         )

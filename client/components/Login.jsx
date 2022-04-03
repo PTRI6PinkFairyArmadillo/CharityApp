@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import Dashboard from '../containers/Dashboard.js'
 import signInImg from '../assets/Yogi.jpg'
+import { Navigate } from 'react-router-dom';
 
 
 
@@ -8,15 +9,16 @@ export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            loggedIn: false,
             username: '',
-            plainPassword: '',
+            plainPassword: ''
         }
         
     this.handleLogin = this.handleLogin.bind(this);
     }
 
     handleLogin(e) {
-        fetch('/loginSignUp/login', {
+        fetch('/loginSignUp/logIn', {
             method: 'POST',
             body: JSON.stringify({
                 username: this.state.username,
@@ -26,18 +28,25 @@ export class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-            console.log('login response all userInfo',res)
-          return this.setState({
-            loggedIn: true,
-            username: '',
-            plainPassword: ''
-          })
+        //   this.setState({loggedIn: JSON.stringify(res.userInfo.accessToken)})
+        //   return this.setState({
+        //     loggedIn: true,
+        //     username: '',
+        //     plainPassword: ''
+        //   })
+          console.log(JSON.stringify(res.accessToken))
+          return this.props.setToken(res.accessToken)
+          
         })
         .catch(err => console.log('handleLogin: ERROR: ',err))
     }
-
+    
     render() {
+      
+        let loggedIn = this.state.loggedIn
         return (
+            <div>
+            {loggedIn ? <Navigate to={'/dashboard'} /> :
             <div className="base-container" ref={this.props.containerRef}>
             <div className="header">Login</div>
             <div className="content">
@@ -61,6 +70,10 @@ export class Login extends Component {
                 </button>
             </div>
             </div>
+            }
+            </div>
         );
         }
     }
+
+    export default Login;
