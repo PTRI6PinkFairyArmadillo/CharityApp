@@ -3,6 +3,7 @@ import { Signup, Login } from './components/index';
 // import Signup from './components/Signup';
 // import Login from './components/Login';
 import Dashboard from './containers/Dashboard';
+import PlaidApp from './components/PlaidLink';
 import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './styles/app.scss';
 
@@ -48,7 +49,13 @@ class App extends Component {
     // const current = isLogginActive ? "Signup" : "Login";
     // const currentActive = isLogginActive ? "login" : "register";
     if (!this.state.token) {
-      return <Login setToken={this.setToken} />
+      return (
+        <div>
+          <Login setToken={this.setToken} />
+          <PlaidApp></PlaidApp>
+        </div>
+
+      )
     }
     return (
       <BrowserRouter>
@@ -69,10 +76,10 @@ class App extends Component {
             element={<Dashboard />}
           />
         </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
 
 
-      
+
       // <div className="App">
       //     <div className="login">
       //       <div className="container" ref={ref => (this.container = ref)}>
@@ -90,7 +97,7 @@ class App extends Component {
       //         onClick={this.changeState.bind(this)}
       //       />
       //     </div>
-          
+
       // </div>
     );
   }

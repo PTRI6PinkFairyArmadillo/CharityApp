@@ -35,7 +35,12 @@ module.exports = {
     historyApiFallback: true,
     proxy: {
       '/login': {
-        target: 'http://localhost:3001',
+        target: 'http://localhost:3001/',
+        secure: false,
+        changeOrigin: true,
+      },
+      '/plaid/**': {
+        target: 'http://localhost:3001/',
         secure: false,
         changeOrigin: true,
       },

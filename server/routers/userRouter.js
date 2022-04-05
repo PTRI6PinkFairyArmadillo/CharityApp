@@ -13,4 +13,4 @@ router.post('/signup', userController.createUser, (req, res) => {
 router.post('/signout', userController.signoutUser, (req, res) => {
   return res.status(200).send('success');
 });
- module.exports = router;
+module.exports = router;
