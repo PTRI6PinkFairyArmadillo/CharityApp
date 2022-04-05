@@ -1,6 +1,12 @@
 # CharityApp
+: {
+    path: path.join(__dirname, 'dist'),
+    publicPath: '/',
+    filename: "[name].js",
+    sourceMapFilename: "[name].js.map"
+  }
 
-
+"source-map"
 
 
 STYLE RULES:
@@ -62,3 +68,12 @@ checkout branch: git checkout <feature>
 while on the feature branch for setting upstreaming and committing: git push --set-upstream origin <feature>
 
 git clone --branch <branchname> https://github.com/PTRI6PinkFairyArmadillo/CharityApp.git
+
+
+
+
+**API INFO**
+
+GLOBAL GIVING (store of charitable orgs):
+GLOBAL_GIVING_KEY=57c25a2c-f4d8-47b2-add7-cd2e316adb3e
+Instructions for main GET request (Get all orgs): https://www.globalgiving.org/api/methods/get-all-organizations/

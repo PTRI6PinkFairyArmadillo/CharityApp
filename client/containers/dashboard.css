@@ -1,0 +1,140 @@
+.panel-group {
+    margin-top: 30px;
+  }
+  .panel-title{
+    text-align: center;
+  }
+  .panel-collapse {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height .5s ease;
+  }
+  .panel-close {
+    max-height: 0;
+  }
+
+  .list-group-item {
+    text-align: center;
+    width: 300px;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid black;
+    list-style: none;
+    padding: 5px 15px;
+    background-color: antiquewhite;
+  }
+  .Collapsible {
+    text-align: center;
+    border-radius: 7px;
+    padding: 5px;
+    background-color: rgba(255, 192, 206, .7);
+    color: #4f4f4f;
+    margin: 10px;
+  }
+  .pTag {
+    padding: 8px;
+    border-radius: 7px;
+  }
+  .Collapsible__trigger {
+    font-size: 20px;
+  }
+  .collapsibleContainer{
+    width: 70%;
+    height: 100%;
+  }
+  .accNumber{
+    display: inline;
+  }
+  .button {
+    padding: 5px 20px;
+    margin: 5px 5px 15px 5px;
+    background-color: rgb(247, 247, 247);
+    color: #4f4f4f;
+    border: 1px solid #4f4f4f;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .deleteButton:hover{
+    background-color: #f55353;
+    color: rgb(247, 247, 247);
+  }
+
+  .updateButton:hover{
+    background-color: #4f4f4f;
+    color: #fff;
+  }
+  .dashboardBackground {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    height: 100%;
+  }
+  .one {
+    margin: 0 auto
+  }
+  .two {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 30%;
+  }
+  .donate {
+    width: 100%;
+    height: 125px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .clock {
+    margin: 0 auto;
+    margin-bottom: 100px;
+    width: 200px;
+    height: 200px;
+  }
+  .donate img {
+    margin-top: 20px;
+    width: 225px;
+    height: 80px;
+  }
+  .amounts {
+    display: flex;
+    justify-content: center;
+  }
+  .amountsInside {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-align: center;
+    color: #4f4f4f;
+  }
+  .chartNav {
+    display: flex;
+    justify-content: center;
+  }
+  .buttonNav {
+    padding: 5px 20px;
+    margin: 5px 5px 15px 5px;
+    background-color: rgb(255, 192, 206);
+    color: #4f4f4f;
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .buttonNav:hover {
+    color: rgb(255, 192, 206);
+    background-color: #4f4f4f;
+  }
+
+  .signout {
+    padding: 5px 20px;
+    margin: 5px 5px 15px 5px;
+    background-color: #4f4f4f;
+    color: rgb(255, 192, 206);
+    border-radius: 10px;
+    transition: 0.3s;
+    cursor: pointer;
+  }
+  .signout:hover {
+    color: rgb(255, 192, 206);
+    background-color: rgb(255, 192, 206);
+  }
