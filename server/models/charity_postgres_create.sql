@@ -29,7 +29,7 @@ CREATE TABLE public.users (
     "first_name" varchar NOT NULL,
     "last_name" varchar NOT NULL,
     "username" varchar NOT NULL,
-    "password" TEXT NOT NULL
+    "password" TEXT NOT NULL,
 );
 CREATE TABLE public.bank_accounts (
     "_id" serial PRIMARY KEY,
