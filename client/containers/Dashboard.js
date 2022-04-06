@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Collapsible from 'react-collapsible';
+import Cookies from 'universal-cookie';
 import Popup from "reactjs-popup";
 import Menu from "./hamburger/Menu";
 import BurgerIcon from "./hamburger/BurgerIcon";
@@ -12,8 +10,8 @@ import './dashboard.css';
 import 'react-calendar/dist/Calendar.css';
 import donate from '../public/donate.png';
 import { Chart } from "react-google-charts";
+import {Navigate } from 'react-router-dom';
 
-//fetch data
 
 const AddBank = () => (
     <div>
@@ -95,14 +93,6 @@ export const dataBar = [
     border: "none"
   };
 
-const mapDispatchToProps = dispatch => ({
-
-});
-
-const mapStateToProps = state => ({
-
-});
-
 class Dashboard extends Component {
     constructor(props) {
 		super(props);
@@ -112,6 +102,12 @@ class Dashboard extends Component {
             month: 'none'
 		};
 	  }
+    componentDidMount() {
+      fetch('/dashboard')
+      .then(response => response.json())
+      .then(data => console.log('this is response', data))
+    }
+
         changeTotal= () => {
 		    this.setState({total: "block"})
 			this.setState({ ytd: "none" })
@@ -129,24 +125,33 @@ class Dashboard extends Component {
 	    }
 
       signOut(e) {
-        fetch('/loginSignUp/signout', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => {
-            window.location.href = "http://localhost:8080/logIn"
-        })
-        .catch(err => console.log('handleLogin: ERROR: ',err))
+        // const cookies = new Cookies()
+        // cookies.remove('jwt')
+        // window.location.href = "/"
+        
+        // fetch('loginSignUp/signout', {
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //       username: this.state.username,
+        //       plainPassword: this.state.plainPassword
+        //     }),
+        //     headers: {'Content-Type': 'application/json'}
+        // })
+        // .then(() => {
+        //     window.location.href = "/logIn"
+        // })
+        // .catch(err => console.log('handleLogin: ERROR: ',err))
     }
 
     render(){
+      
         return(
             <div className="dashboardBackground">
                 <div className="collapsibleContainer">
                 <div className="one">
        
                 <div className="chart">
-                    <div className="chartNav"><button className="buttonNav"  onClick={this.changeTotal}>total</button><button className="buttonNav" onClick={this.changeYtd}>ytd</button><button className="buttonNav" onClick={this.changeMonth}>month</button><button className="signout" onClick={(e) => this.signOut(e)}>signout</button></div>
+                    <div className="chartNav"><button className="buttonNav"  onClick={this.changeTotal}>total</button><button className="buttonNav" onClick={this.changeYtd}>ytd</button><button className="buttonNav" onClick={this.changeMonth}>month</button><button className="signout" onClick={(e) => this.props.logout(e)}>signout</button><button className="buttonNav" onClick={(e) => <Navigate to={'/banks'}/>}>banks</button></div>
                     
                     <div className="total" style={{display: this.state.total}}>
                     <Chart

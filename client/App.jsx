@@ -1,28 +1,26 @@
 import React, { Component } from 'react';
-import { Signup, Login } from './components/index';
-// import Signup from './components/Signup';
-// import Login from './components/Login';
+import { Signup, Login, Bank } from './components/index';
+import Cookies from 'universal-cookie';
 import Dashboard from './containers/Dashboard';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { Route, Routes, BrowserRouter, Navigate } from 'react-router-dom';
 import './styles/app.scss';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogginActive: true,
+      // isLogginActive: true,
       loggedIn: false,
       token: null,
     };
+    this.logout = this.logout.bind(this)
   }
 
   componentDidMount() {
-    //Add .right by default
-
-    // this.rightSide.classList.add("right");
-
-    //if loggedIn, render/fetch Dashboard
-
+    const cookies = new Cookies()
+    if (cookies.get('jwt')) {
+      this.setState({loggedIn: true})
+    }
   }
 
   // changeState() {
@@ -43,36 +41,50 @@ class App extends Component {
     })
   }
 
+  logout = (e) => {
+    const cookies = new Cookies()
+    cookies.remove('jwt')
+    this.setState({
+      loggedIn: false
+    })
+    window.location.href = "/logIn"
+    console.log('signout clicked');
+  }
+  
+
   render() {
     // const { isLogginActive } = this.state;
     // const current = isLogginActive ? "Signup" : "Login";
     // const currentActive = isLogginActive ? "login" : "register";
-    if (!this.state.token) {
-      return <Login setToken={this.setToken} />
-    }
+    // if (!this.state.token) {
+    //   return <Login setToken={this.setToken} />
+    // }
+    let token = this.state.token
+    
+  
     return (
       <BrowserRouter>
+        {/* {(!this.state.loggedIn) ? <Navigate to={'/logIn'} /> : <Navigate to={'/dash'} />} */}
         <Routes>
-          {/* <Route
-            exact
-            path='/'
-            element={<Signup />}
+          <Route
+            exact path='/login'
+            element={<Login loggedIn={this.state.loggedIn}/>}
           />
           <Route
-            exact
-            path='/logIn'
-            element={<Login />}
-          /> */}
-          <Route
-            exact
-            path='/'
-            element={<Dashboard />}
+            exact path='/dash'
+            element={<Dashboard loggedIn={this.state.loggedIn} logout={this.logout}/>}
+          />
+           <Route
+            exact path='/banks'
+            element={<Bank />}
           />
         </Routes>
-    </BrowserRouter>
-
-
       
+        
+      </BrowserRouter >
+
+
+
       // <div className="App">
       //     <div className="login">
       //       <div className="container" ref={ref => (this.container = ref)}>
@@ -90,7 +102,7 @@ class App extends Component {
       //         onClick={this.changeState.bind(this)}
       //       />
       //     </div>
-          
+
       // </div>
     );
   }
