@@ -1,4 +1,3 @@
-import '../styles/signIn.scss'
-export { Bank } from "./Bank";
+import '../styles/signIn.scss';
 export { Login } from "./Login";
 export { Signup } from "./Signup";

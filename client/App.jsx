@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Signup, Login, Bank } from './components/index';
+import { Signup, Login} from './components/index';
+import Bank from './components/Bank';
 import PublicRoutes from './components/PublicRoutes';
 import PrivateRoutes from './components/PrivateRoutes';
 import Cookies from 'universal-cookie';
@@ -50,8 +51,9 @@ class App extends Component {
           <Route path='/' element={<PublicRoutes loggedIn={this.state.loggedIn} />}>
             <Route exact path='/' element={<Login login={this.login} loggedIn={this.state.loggedIn} />} />
           </Route>
-          <Route path='/Dashboard' element={<PrivateRoutes logout={this.logout} loggedIn={this.state.loggedIn} />}>
-            <Route exact path='/Dashboard' element={<Dashboard logout={this.logout}/>}/>
+          <Route path='/dashboard' element={<PrivateRoutes logout={this.logout} loggedIn={this.state.loggedIn} />}>
+            <Route exact path='/dashboard/banks' element={<Bank />}/>
+            <Route exact path='/dashboard' element={<Dashboard logout={this.logout}/>}/>
           </Route>
         </Routes>
       </BrowserRouter >
