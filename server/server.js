@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const userRouter = require('./routers/userRouter.js');
 const dashboardRouter = require('./routers/dashboardRouter.js');
+const bankRouter = require('./routers/bankRouter.js');
 const port = 3001;
 
 const app = express();
@@ -14,7 +15,8 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use('/loginSignUp', userRouter);
-
+app.use('/dashboard', dashboardRouter)
+app.use('/banks', bankRouter)
 
 //bank connection endpoint
 //charity dashboard endpoint (might need separate for charity api)

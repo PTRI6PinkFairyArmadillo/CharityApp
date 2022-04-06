@@ -2,14 +2,12 @@ import React, { Component, useState } from 'react';
 import Dashboard from '../containers/Dashboard.js'
 import signInImg from '../assets/Yogi.jpg'
 import { Navigate } from 'react-router-dom';
-
-
+import Cookies from 'universal-cookie';
 
 export class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            loggedIn: false,
             username: '',
             plainPassword: ''
         }
@@ -18,6 +16,7 @@ export class Login extends Component {
     }
 
     handleLogin(e) {
+        const cookies = new Cookies()
         fetch('/loginSignUp/logIn', {
             method: 'POST',
             body: JSON.stringify({
@@ -28,25 +27,21 @@ export class Login extends Component {
         })
         .then(res => res.json())
         .then(res => {
-        //   this.setState({loggedIn: JSON.stringify(res.userInfo.accessToken)})
-        //   return this.setState({
-        //     loggedIn: true,
-        //     username: '',
-        //     plainPassword: ''
-        //   })
-          console.log(JSON.stringify(res.accessToken))
-          return this.props.setToken(res.accessToken)
+            // Store
+          cookies.set('jwt', res.accessToken)
           
+          this.loggedIn = true
+          window.location.href = '/dash'
+
         })
         .catch(err => console.log('handleLogin: ERROR: ',err))
     }
     
     render() {
-      
-        let loggedIn = this.state.loggedIn
+
         return (
             <div>
-            {loggedIn ? <Navigate to={'/dashboard'} /> :
+            {this.props.loggedIn ? <h1>Not logged in</h1> :
             <div className="base-container" ref={this.props.containerRef}>
             <div className="header">Login</div>
             <div className="content">
