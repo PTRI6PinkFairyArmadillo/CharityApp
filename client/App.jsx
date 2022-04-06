@@ -17,6 +17,12 @@ class App extends Component {
   }
 
   componentDidMount() {
+    const cookies = new Cookies()
+    if (cookies.get('jwt')) {
+      this.setState({
+        loggedIn: true
+      })
+    }
   }
   
   login = (e) => {
