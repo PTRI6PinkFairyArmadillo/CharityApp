@@ -16,13 +16,21 @@ SET client_min_messages = warning;
 SET row_security = off;
 CREATE EXTENSION pgcrypto;
 
+DROP TABLE public.charities
+DROP TABLE public.users
+DROP TABLE public.bank_accounts
+DROP TABLE public.user_bank_accounts
+DROP TABLE public.user_favorited_charities
+
 CREATE TABLE public.charities (
     "_id" serial PRIMARY KEY,
     "name" varchar NOT NULL,
     "city" varchar NOT NULL,
     "country" varchar NOT NULL,
-    "logoURL" varchar NOT NULL,
+    "logoUrl" varchar NOT NULL,
     "url" varchar NOT NULL,
+    "mission" varchar NOT NULL,
+    "ein" varchar NOT NULL
 );
 CREATE TABLE public.users (
     "_id" serial PRIMARY KEY,

@@ -77,3 +77,9 @@ git clone --branch <branchname> https://github.com/PTRI6PinkFairyArmadillo/Chari
 GLOBAL GIVING (store of charitable orgs):
 GLOBAL_GIVING_KEY=57c25a2c-f4d8-47b2-add7-cd2e316adb3e
 Instructions for main GET request (Get all orgs): https://www.globalgiving.org/api/methods/get-all-organizations/
+
+
+**COMMITTING TO POSTGRESQL**
+psql -d <url from elephantSQL> -f starwars_postgres_create.sql
+
+psql -d 'postgres://tuvajlhz:0B3hf6CGsyuCOLtTVBAdCiirBkXFYN2S@heffalump.db.elephantsql.com/tuvajlhz' -f charity_postgres_create.sql
