@@ -1,7 +1,7 @@
 const db = require('../models/charityModels');
 const bankController = {};
 
-bankController.saveBankToDb = (req, res, next) => {
+bankController.saveBankToDb = async (req, res, next) => {
   const { accounts, numbers } = res.locals.data;
   const checkingsSavings = [];
 
@@ -22,7 +22,8 @@ bankController.saveBankToDb = (req, res, next) => {
     $2,
     $3,
     $4,
-    $5
+    $5,
+    $6
   )
   `;
 
@@ -52,7 +53,7 @@ bankController.saveBankToDb = (req, res, next) => {
   });
 
   let newAcc = [];
-  checkingsSavings.forEach(el => {
+  for (const el of checkingsSavings) {
     newAcc = [
       el.account_id,
       el.account,
@@ -61,11 +62,12 @@ bankController.saveBankToDb = (req, res, next) => {
       el.routing,
       el.wire_routing
     ]
-      db.query(queryBank, newAcc, (error, dbRes) => {
-        
-      });
-  })
-
+    try {
+      const resp = await db.query(queryBank, newAcc);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   next();
 };
 
