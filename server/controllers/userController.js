@@ -100,9 +100,10 @@ userController.verifyUser = (req, res, next) => {
 };
 
 userController.signoutUser = (req, res, next) => {
-    const accessToken = process.env.ACCESS_TOKEN_SECRET;
-    jwt.destroy(accessToken)
-    next()
+  const accessToken = process.env.ACCESS_TOKEN_SECRET;
+  console.log(`ACCESS TOKEN: ${accessToken}`)
+  jwt.destroy(accessToken);
+  return next();
 };
 
 userController.signinUser = (req, res, next) => {

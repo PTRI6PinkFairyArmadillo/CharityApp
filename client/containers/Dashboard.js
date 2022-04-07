@@ -1,7 +1,5 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Collapsible from 'react-collapsible';
+import React, { useEffect, useState, Component } from 'react';
+import Cookies from 'universal-cookie';
 import Popup from "reactjs-popup";
 import Menu from "./hamburger/Menu";
 import BurgerIcon from "./hamburger/BurgerIcon";
@@ -12,8 +10,8 @@ import './dashboard.css';
 import 'react-calendar/dist/Calendar.css';
 import donate from '../public/donate.png';
 import { Chart } from "react-google-charts";
+import { useNavigate } from 'react-router-dom';
 
-//fetch data
 
 const AddBank = () => (
     <div>
@@ -95,60 +93,33 @@ export const dataBar = [
     border: "none"
   };
 
-const mapDispatchToProps = dispatch => ({
+const Dashboard = (props) => {
+    useEffect (() => {
+      fetch('/dashboard')
+      .then(response => response.json())
+      .then(data => console.log('this is response', data))   
+    }, []);
 
-});
+    let navigate = useNavigate();
 
-const mapStateToProps = state => ({
-
-});
-
-class Dashboard extends Component {
-    constructor(props) {
-		super(props);
-		this.state = {
-            total: 'block',
-            ytd: 'none',
-            month: 'none'
-		};
-	  }
-        changeTotal= () => {
-		    this.setState({total: "block"})
-			this.setState({ ytd: "none" })
-			this.setState({ month: "none" })
-	    }
-        changeYtd= () => {
-		    this.setState({ytd: "block"})
-			this.setState({ total: "none" })
-			this.setState({ month: "none" })
-	    }
-        changeMonth= () => {
-		    this.setState({month: "block"})
-			this.setState({ ytd: "none" })
-			this.setState({ total: "none" })
-	    }
-
-      signOut(e) {
-        fetch('/loginSignUp/signout', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'}
-        })
-        .then(res => {
-            window.location.href = "http://localhost:8080/logIn"
-        })
-        .catch(err => console.log('handleLogin: ERROR: ',err))
+    const navigateToBanks = (e) => {
+      e.preventDefault();
+      navigate('/dashboard/banks')
     }
 
-    render(){
+    const [total, changeTotal] = useState('block')
+    const [ytd, changeYtd] = useState('block')
+    const [month, changeMonth] = useState('block')
+
         return(
             <div className="dashboardBackground">
                 <div className="collapsibleContainer">
                 <div className="one">
        
                 <div className="chart">
-                    <div className="chartNav"><button className="buttonNav"  onClick={this.changeTotal}>total</button><button className="buttonNav" onClick={this.changeYtd}>ytd</button><button className="buttonNav" onClick={this.changeMonth}>month</button><button className="signout" onClick={(e) => this.signOut(e)}>signout</button></div>
+                    <div className="chartNav"><button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button><button className="buttonNav" onClick={() => changeMonth('block')}>month</button><button className="signout" onClick={(e) => props.logout(e)}>signout</button><button className="buttonNav" onClick={navigateToBanks}>banks</button></div>
                     
-                    <div className="total" style={{display: this.state.total}}>
+                    <div className="total" style={{display: total}}>
                     <Chart
                         chartType="PieChart"
                         data={dataPie}
@@ -157,7 +128,7 @@ class Dashboard extends Component {
                         height={"400px"}
                     />
                     </div>
-                    <div className="ytd" style={{display: this.state.ytd}}>
+                    <div className="ytd" style={{display: ytd}}>
                     <Chart
                         chartType="AreaChart"
                         width="100%"
@@ -166,7 +137,7 @@ class Dashboard extends Component {
                         options={optionsChart}
                     />
                     </div>
-                    <div className="month" style={{display: this.state.month}}>
+                    <div className="month" style={{display: month}}>
                     <Chart
                         chartType="Bar"
                         width="100%"
@@ -220,8 +191,6 @@ class Dashboard extends Component {
                 </div>
             </div>
         )
-    }
 }
 
-// export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
 export default Dashboard;

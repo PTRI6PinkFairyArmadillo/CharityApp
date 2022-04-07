@@ -1,113 +1,64 @@
 import React, { Component } from 'react';
-import { Signup, Login } from './components/index';
-// import Signup from './components/Signup';
-// import Login from './components/Login';
+import { Signup, Login} from './components/index';
+import Bank from './components/Bank';
+import PublicRoutes from './components/PublicRoutes';
+import PrivateRoutes from './components/PrivateRoutes';
+import Cookies from 'universal-cookie';
 import Dashboard from './containers/Dashboard';
-import { Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './styles/app.scss';
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLogginActive: true,
       loggedIn: false,
-      token: null,
     };
+    this.logout = this.logout.bind(this)
   }
 
   componentDidMount() {
-    //Add .right by default
-
-    // this.rightSide.classList.add("right");
-
-    //if loggedIn, render/fetch Dashboard
-
+    const cookies = new Cookies()
+    if (cookies.get('jwt')) {
+      this.setState({
+        loggedIn: true
+      })
+    }
   }
-
-  // changeState() {
-  //   const { isLogginActive } = this.state;
-
-  //   if (isLogginActive) {
-  //     this.rightSide.classList.remove("right");
-  //     this.rightSide.classList.add("left");
-  //   } else {
-  //     this.rightSide.classList.remove("left");
-  //     this.rightSide.classList.add("right");
-  //   }
-  //   this.setState(prevState => ({ isLogginActive: !prevState.isLogginActive }));
-  // }
-  setToken = (token) => {
+  
+  login = (e) => {
     this.setState({
-      token: token,
+      loggedIn: true
     })
+    console.log('logged in');
   }
+
+  logout = (e) => {
+    const cookies = new Cookies()
+    cookies.remove('jwt')
+    this.setState({
+      loggedIn: false
+    })
+    console.log('logged out');
+  }
+  
 
   render() {
-    // const { isLogginActive } = this.state;
-    // const current = isLogginActive ? "Signup" : "Login";
-    // const currentActive = isLogginActive ? "login" : "register";
-    if (!this.state.token) {
-      return <Login setToken={this.setToken} />
-    }
+    
     return (
       <BrowserRouter>
         <Routes>
-          {/* <Route
-            exact
-            path='/'
-            element={<Signup />}
-          />
-          <Route
-            exact
-            path='/logIn'
-            element={<Login />}
-          /> */}
-          <Route
-            exact
-            path='/'
-            element={<Dashboard />}
-          />
+          <Route path='/' element={<PublicRoutes loggedIn={this.state.loggedIn} />}>
+            <Route exact path='/' element={<Login login={this.login} loggedIn={this.state.loggedIn} />} />
+          </Route>
+          <Route path='/dashboard' element={<PrivateRoutes logout={this.logout} loggedIn={this.state.loggedIn} />}>
+            <Route exact path='/dashboard/banks' element={<Bank />}/>
+            <Route exact path='/dashboard' element={<Dashboard logout={this.logout}/>}/>
+          </Route>
         </Routes>
-    </BrowserRouter>
-
-
-      
-      // <div className="App">
-      //     <div className="login">
-      //       <div className="container" ref={ref => (this.container = ref)}>
-      //         {isLogginActive && (
-      //           <Login containerRef={ref => (this.current = ref)}/>
-      //         )}
-      //         {!isLogginActive && (
-      //           <Signup containerRef={ref => (this.current = ref)}/>
-      //         )}
-      //       </div>
-      //       <RightSide
-      //         current={current}
-      //         currentActive={currentActive}
-      //         containerRef={ref => (this.rightSide = ref)}
-      //         onClick={this.changeState.bind(this)}
-      //       />
-      //     </div>
-          
-      // </div>
+      </BrowserRouter >
     );
   }
 }
-
-// const RightSide = props => {
-//   return (
-//     <div
-//       className="right-side"
-//       ref={props.containerRef}
-//       onClick={props.onClick}
-//     >
-//       <div className="inner-container">
-//         <div className="text">{props.current}</div>
-//       </div>
-//     </div>
-//   );
-// };
 
 export default App;

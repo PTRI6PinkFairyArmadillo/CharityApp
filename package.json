@@ -40,7 +40,8 @@
     "react-router-dom": "^6.3.0",
     "reactjs-popup": "^2.0.5",
     "redux-devtools-extension": "^2.13.9",
-    "source-map-loader": "^3.0.1"
+    "source-map-loader": "^3.0.1",
+    "universal-cookie": "^4.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.17.8",
