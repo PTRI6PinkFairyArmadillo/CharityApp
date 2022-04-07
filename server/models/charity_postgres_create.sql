@@ -33,8 +33,12 @@ CREATE TABLE public.users (
 );
 CREATE TABLE public.bank_accounts (
     "_id" serial PRIMARY KEY,
+    "account_id" varchar NOT NULL,
     "account_number" varchar NOT NULL,
-    "bank_name" varchar NOT NULL
+    "bank_name" varchar NOT NULL,
+    "official_name" varchar NOT NULL,
+    "routing" varchar NOT NULL,
+    "wire_routing" varchar NOT NULL
 );
 
 -- JOIN TABLES

@@ -48,7 +48,6 @@ class App extends Component {
     
     return (
       <BrowserRouter>
-      <PlaidApp></PlaidApp>
         <Routes>
           <Route path='/' element={<PublicRoutes loggedIn={this.state.loggedIn} />}>
             <Route exact path='/' element={<Login login={this.login} loggedIn={this.state.loggedIn} />} />

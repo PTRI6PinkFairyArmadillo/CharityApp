@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
 import './bank.css';
 import { useNavigate } from 'react-router-dom';
+import PlaidLink from './PlaidLink'
 
 const Bank = (props) => {
 
@@ -16,6 +17,7 @@ const Bank = (props) => {
     return (
       <div>
         <button className='backtoDashboard' onClick={backToDashboard}>Back To Dashboard</button>
+        <PlaidLink></PlaidLink>
         <Collapsible trigger="Bofa 2748">
           <div className="pTag">
               <h3>Bank of America</h3>

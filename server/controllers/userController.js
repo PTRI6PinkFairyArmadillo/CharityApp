@@ -84,7 +84,7 @@ userController.verifyUser = (req, res, next) => {
         })
       }
       if (passMatch) {
-        const accessToken = jwt.sign(response.rows[0]._id, process.env.ACCESS_TOKEN_SECRET, {expiresIn: '1d'});
+        const accessToken = jwt.sign(response.rows[0]._id, process.env.ACCESS_TOKEN_SECRET);
         res.locals.userInfo = response.rows[0];
         res.locals.userInfo.accessToken = accessToken;
         return next();
