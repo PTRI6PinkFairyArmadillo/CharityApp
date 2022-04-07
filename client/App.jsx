@@ -5,7 +5,8 @@ import PublicRoutes from './components/PublicRoutes';
 import PrivateRoutes from './components/PrivateRoutes';
 import Cookies from 'universal-cookie';
 import Dashboard from './containers/Dashboard';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import PlaidApp from './components/PlaidLink';
+import { Route, Routes, BrowserRouter } from 'react-router-dom';
 import './styles/app.scss';
 
 class App extends Component {
@@ -47,6 +48,7 @@ class App extends Component {
     
     return (
       <BrowserRouter>
+      <PlaidApp></PlaidApp>
         <Routes>
           <Route path='/' element={<PublicRoutes loggedIn={this.state.loggedIn} />}>
             <Route exact path='/' element={<Login login={this.login} loggedIn={this.state.loggedIn} />} />

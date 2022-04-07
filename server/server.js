@@ -1,27 +1,23 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const plaidRouter = require('./routers/plaidRouter.js');
 const userRouter = require('./routers/userRouter.js');
+const cors = require('cors');
 const dashboardRouter = require('./routers/dashboardRouter.js');
 const plaid = require('plaid');
 const bankRouter = require('./routers/bankRouter.js');
-const port = 3001;
-
 const app = express();
-const plaidClient = new plaid.Client({
-  clientID: process.env.PLAID_CLIENT_ID,
-  secret: process.env.PLAID_SECRET,
-  env: plaid.environments.PLAID_ENV
-});
+const port = 3001;
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false,
 }));
+app.use(cors());
 
-
-
+app.use('/plaid', plaidRouter);
 app.use('/loginSignUp', userRouter);
 app.use('/dashboard', dashboardRouter)
 app.use('/banks', bankRouter)

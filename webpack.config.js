@@ -25,7 +25,7 @@ module.exports = {
   plugins: [new HtmlWebpackPlugin({
     template: './client/index.html'
   }),
-  new webpack.SourceMapDevToolPlugin({filename: '[file].map[query]'})],
+  new webpack.SourceMapDevToolPlugin({ filename: '[file].map[query]' })],
   devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
@@ -39,7 +39,7 @@ module.exports = {
         secure: false,
         changeOrigin: true,
       },
-      '/dashboard': {
+      '/plaid': {
         target: 'http://localhost:3001',
         secure: false,
         changeOrigin: true,
@@ -60,7 +60,7 @@ module.exports = {
       },
       {
         test: /.(css|scss)$/,
-        use: ['style-loader','css-loader','sass-loader'],
+        use: ['style-loader', 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(gif|png|jpe?g|svg)$/i,
@@ -74,6 +74,6 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.js', '.jsx','scss','jpg','png','css']
+    extensions: ['.js', '.jsx', 'scss', 'jpg', 'png', 'css']
   },
 };

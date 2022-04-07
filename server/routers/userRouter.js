@@ -14,5 +14,4 @@ router.post('/signout', userController.signoutUser, (req, res) => {
   console.log('returned to router')
   return res.status(200).send('success');
 });
-
- module.exports = router;
+module.exports = router;
