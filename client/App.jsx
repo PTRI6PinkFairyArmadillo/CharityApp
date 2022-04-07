@@ -48,17 +48,18 @@ class App extends Component {
     // const { isLogginActive } = this.state;
     // const current = isLogginActive ? "Signup" : "Login";
     // const currentActive = isLogginActive ? "login" : "register";
-    if (!this.state.token) {
-      return (
-        <div>
-          <Login setToken={this.setToken} />
-          <PlaidApp></PlaidApp>
-        </div>
+    // if (!this.state.token) {
+    //   return (
+    //     <div>
+    //       <Login setToken={this.setToken} />
+    //       <PlaidApp></PlaidApp>
+    //     </div>
 
-      )
-    }
+    //   )
+    // }
     return (
       <BrowserRouter>
+      <PlaidApp></PlaidApp>
         <Routes>
           {/* <Route
             exact
@@ -70,11 +71,11 @@ class App extends Component {
             path='/logIn'
             element={<Login />}
           /> */}
-          <Route
+          {/* <Route
             exact
             path='/'
             element={<Dashboard />}
-          />
+          /> */}
         </Routes>
       </BrowserRouter>
 

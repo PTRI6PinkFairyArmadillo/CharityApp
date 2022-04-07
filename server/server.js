@@ -1,18 +1,20 @@
 const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
+const plaidRouter = require('./routers/plaidRouter.js');
 const userRouter = require('./routers/userRouter.js');
+const cors = require('cors');
 const dashboardRouter = require('./routers/dashboardRouter.js');
-const plaidRouter = require('./routers/plaidRouter.js')
+const app = express();
 const port = 3001;
 
-const app = express();
 
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false,
 }));
+app.use(cors());
 
 app.use('/plaid', plaidRouter);
 app.use('/loginSignUp', userRouter);
