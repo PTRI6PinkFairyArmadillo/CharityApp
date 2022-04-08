@@ -11,7 +11,7 @@ import 'react-calendar/dist/Calendar.css';
 import donate from '../public/donate.png';
 import { Chart } from "react-google-charts";
 import { useNavigate } from 'react-router-dom';
-
+import CountUp from 'react-countup';
 
 const AddBank = () => (
     <div>
@@ -25,21 +25,21 @@ const AddBank = () => (
     </div>
   );
 
-  const options = {
-    "useCustomTime": false,
-    "width": "100%",
-    "height": "100%",
-    "border": true,
-    "borderColor": "#525252",
-    "baseColor": "#ffc0ce",
-    "centerColor": "#ffc0ce",
-    "centerBorderColor": "#ffffff",
-    "handColors": {
-      "second": "#d81c7a",
-      "minute": "#ffffff",
-      "hour": "#ffffff"
-    }
-  }
+  // const options = {
+  //   "useCustomTime": false,
+  //   "width": "100%",
+  //   "height": "100%",
+  //   "border": true,
+  //   "borderColor": "#525252",
+  //   "baseColor": "#ffc0ce",
+  //   "centerColor": "#ffc0ce",
+  //   "centerBorderColor": "#ffffff",
+  //   "handColors": {
+  //     "second": "#d81c7a",
+  //     "minute": "#ffffff",
+  //     "hour": "#ffffff"
+  //   }
+  // }
 
 export const dataBar = [
     ["Year", "Sales", "Expenses", "Profit"],
@@ -50,10 +50,11 @@ export const dataBar = [
   ];
   
   export const optionsBar = {
+    backgroundColor: { fill:'transparent' },
     chart: {
       title: "Company Performance",
-      subtitle: "Sales, Expenses, and Profit: 2014-2017",
-    },
+      subtitle: "Sales, Expenses, and Profit: 2014-2017"
+    }
   };
   export const dataPie = [
     ["CHARITY", "AMOUNT"],
@@ -64,6 +65,7 @@ export const dataBar = [
     ["CAR FOR ALL", 7],
   ];
   export const optionsPie = {
+    backgroundColor: { fill:'transparent' },
     title: "Total Donations",
   };
 
@@ -76,6 +78,7 @@ export const dataBar = [
   ];
   
   export const optionsChart = {
+    backgroundColor: { fill:'transparent' },
     title: "Company Performance",
     hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
     vAxis: { minValue: 0 },
@@ -107,19 +110,43 @@ const Dashboard = (props) => {
       navigate('/dashboard/banks')
     }
 
-    const [total, changeTotal] = useState('block')
-    const [ytd, changeYtd] = useState('block')
-    const [month, changeMonth] = useState('block')
-
+    const [state, setState] = useState({
+      total: "block",
+      ytd: "none",
+      month: "none",
+      scrolling: false
+    })
+   
+ 
+    const changeTotal = () => {
+      setState({...state, total: "block", ytd: "none", month: "none"});
+    }
+    const changeYtd = () => {
+      setState({...state, total: "none", ytd: "block", month: "none"});
+    }
+    // const changeMonth = () => {
+    //   setState({...state, total: "none", ytd: "none", month: "block"});
+    // }
+ 
         return(
-            <div className="dashboardBackground">
+          // style ={ { background: "linear-gradient(-15deg, #e73c7e, #23a6d5, #23d5ab)" }}
+            <div className="dashboardBackground" style ={ { background: "linear-gradient( #e73c7e, #23a6d5, #23d5ab)"}}>
+                     
                 <div className="collapsibleContainer">
+      
+      
                 <div className="one">
-       
-                <div className="chart">
-                    <div className="chartNav"><button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button><button className="buttonNav" onClick={() => changeMonth('block')}>month</button><button className="signout" onClick={(e) => props.logout(e)}>signout</button><button className="buttonNav" onClick={navigateToBanks}>banks</button></div>
-                    
-                    <div className="total" style={{display: total}}>
+                <article class="card">
+                      <div class="modest-vid-embed modest-vid-embed--auto">
+                        <div class="modest-vid-embed__wrapper">
+                          <iframe class="modest-vid-embed__item" style={{width: '100%', height: '55%'}}src="https://www.youtube.com/embed/BQ0mxQXmLsk?mute=1&autoplay=1&modestbranding=1&loop=1&rel=0&amp;controls=0&amp;showinfo=0&playlist=E1xkXZs0cAQ" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                      </div>
+                    </article>
+                  <div className="h1video"><h1 className="h1test">Charity App</h1><p className="p1test">be the change the world needs</p></div>
+                    <div className="chartNav"><button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button><button className="buttonNav" onClick={(e) => props.logout(e)}>signout</button></div>
+         
+                    <div className="total" style={{display: state.total}}>
                     <Chart
                         chartType="PieChart"
                         data={dataPie}
@@ -128,7 +155,7 @@ const Dashboard = (props) => {
                         height={"400px"}
                     />
                     </div>
-                    <div className="ytd" style={{display: ytd}}>
+                    <div className="ytd" style={{display: state.ytd}}>
                     <Chart
                         chartType="AreaChart"
                         width="100%"
@@ -137,7 +164,7 @@ const Dashboard = (props) => {
                         options={optionsChart}
                     />
                     </div>
-                    <div className="month" style={{display: month}}>
+                    <div className="month" style={{display: state.month}}>
                     <Chart
                         chartType="Bar"
                         width="100%"
@@ -147,31 +174,26 @@ const Dashboard = (props) => {
                     />
                     </div>
 
-                </div>
                 <div className="amounts">
                     <div className="amountsInside">
-                        <h2>contributions</h2><h1>2400$</h1>
+                        <h2>contributions</h2><CountUp style ={{fontSize:"50px"}} end={2400} duration={7.75}/>
                     </div>
                     <div className="amountsInside">
-                        <h2>donations</h2><h1>14</h1>
+                        <h2>donations</h2><CountUp style ={{fontSize:"50px"}} end={14} duration={7.75}/>
                     </div>
                     <div className="amountsInside">
-                        <h2>contributions</h2><h1>2400$</h1>
+                        <h2>contributions</h2><CountUp style ={{fontSize:"50px"}} end={1480} duration={7.75}/>
                     </div>
                     <div className="amountsInside">
-                        <h2>donations</h2><h1>14</h1>
+                        <h2>donations</h2><CountUp style ={{fontSize:"50px"}} end={10} duration={7.75}/>
                     </div>
                 </div>
                
                 
                 </div>
 
-                <div className="donate"><img src={donate} alt="donate"/></div>
-                </div>
-                <div className="two">
-                
-                <div className="clock"><AnalogClock {...options} /></div>
-                <div className = "calendar"><Calendar/></div>
+                <div><img onClick={navigateToBanks} className="donate" style={{width: "25%", height: "18%"}}src={donate} alt="donate"/></div>
+     
                 </div>
                 <div>
                 

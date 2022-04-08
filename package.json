@@ -33,11 +33,13 @@
     "react": "^16.8.3",
     "react-calendar": "^3.7.0",
     "react-collapsible": "^2.8.4",
+    "react-countup": "^6.2.0",
     "react-dom": "^16.8.3",
     "react-google-charts": "^4.0.0",
     "react-redux": "^7.2.6",
     "react-router-dom": "^6.3.0",
     "reactjs-popup": "^2.0.5",
+    "recharts": "^2.1.9",
     "redux-devtools-extension": "^2.13.9",
     "source-map-loader": "^3.0.1",
     "universal-cookie": "^4.0.4"

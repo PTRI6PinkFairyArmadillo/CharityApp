@@ -14,8 +14,8 @@ const Bank = (props) => {
     }
 
     return (
-      <div>
-        <button className='backtoDashboard' onClick={backToDashboard}>Back To Dashboard</button>
+      <div  className='backtoDashboard' >
+        <button onClick={backToDashboard}  className="buttonNav">dashboard</button>
         <Collapsible trigger="Bofa 2748">
           <div className="pTag">
               <h3>Bank of America</h3>
@@ -23,8 +23,7 @@ const Bank = (props) => {
               <h4 className="accNumber">Account number:</h4> <p className="accNumber">263759302632748</p>
               </div>
               <br></br>
-              <button className="button updateButton">update</button>
-              <button className="button deleteButton">delete</button>
+              <button className="buttonNav">donate</button>
           </div>
         </Collapsible>
         <Collapsible trigger="Amex 2472">
@@ -34,8 +33,7 @@ const Bank = (props) => {
               <h4 className="accNumber">Account number:</h4> <p className="accNumber">263759302632472</p>
               </div>
               <br></br>
-              <button className="button updateButton">update</button>
-              <button className="button deleteButton">delete</button>
+              <button className="button updateButton">donate</button>
           </div>
         </Collapsible>
         <Collapsible trigger="Chase 2201">
@@ -45,8 +43,7 @@ const Bank = (props) => {
               <h4 className="accNumber">Account number:</h4> <p className="accNumber">263759302632201</p>
               </div>
               <br></br>
-              <button className="button updateButton">update</button>
-              <button className="button deleteButton">delete</button>
+              <button className="button updateButton">donate</button>
           </div>
         </Collapsible>
       </div>
