@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Signup, Login} from './components/index';
 import Bank from './components/Bank';
+import Charities from './components/Charities';
 import PublicRoutes from './components/PublicRoutes';
 import PrivateRoutes from './components/PrivateRoutes';
 import Cookies from 'universal-cookie';
@@ -54,6 +55,7 @@ class App extends Component {
           </Route>
           <Route path='/dashboard' element={<PrivateRoutes logout={this.logout} loggedIn={this.state.loggedIn} />}>
             <Route exact path='/dashboard/banks' element={<Bank />}/>
+            <Route exact path='/dashboard/charities' element={<Charities />}/>
             <Route exact path='/dashboard' element={<Dashboard logout={this.logout}/>}/>
           </Route>
         </Routes>

@@ -107,6 +107,11 @@ const Dashboard = (props) => {
       navigate('/dashboard/banks')
     }
 
+    const navigateToCharities = (e) => {
+      e.preventDefault();
+      navigate('/dashboard/charities')
+    }
+
     const [total, changeTotal] = useState('block')
     const [ytd, changeYtd] = useState('block')
     const [month, changeMonth] = useState('block')
@@ -118,7 +123,9 @@ const Dashboard = (props) => {
        
                 <div className="chart">
                     <div className="chartNav"><button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button><button className="buttonNav" onClick={() => changeMonth('block')}>month</button><button className="signout" onClick={(e) => props.logout(e)}>signout</button><button className="buttonNav" onClick={navigateToBanks}>banks</button></div>
-                    
+                    {/* for testing charity front end  */}
+                    <button className="charityNav"  onClick={(e) => navigateToCharities(e)}>Go to Charities List</button>
+
                     <div className="total" style={{display: total}}>
                     <Chart
                         chartType="PieChart"
