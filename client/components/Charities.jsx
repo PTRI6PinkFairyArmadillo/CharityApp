@@ -59,7 +59,7 @@ const Charities = (props) => {
         console.log('CHARITY',charity);
         return (
           <tr key={i} className='table--charityRow'>
-            <td>{k}</td>
+            <td>{i}</td>
             <td>{charity.name}</td>
             <td>{charity.city}</td>
             <td>{charity.country}</td>
