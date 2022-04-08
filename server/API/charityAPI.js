@@ -8,7 +8,7 @@ const { Pool } = require('pg')
 const charityAPIController = {};
 
 charityAPIController.getCharities = async (req,res,next) => {
-    const PostgreSQLColumns = ['city','country','ein','logoUrl','mission','name','url'];
+    const PostgreSQLColumns = ['name','city','country','url','mission','ein'];
 
     try {
         fetch('https://api.globalgiving.org/api/public/orgservice/all/organizations/active?api_key=57c25a2c-f4d8-47b2-add7-cd2e316adb3e', {
@@ -29,7 +29,6 @@ charityAPIController.getCharities = async (req,res,next) => {
                     data = !data ? 'unknown' : data[0];
                     cleanOrg[PostgreSQLColumns[i]] = data;
                 }
-                // console.log(`KEYS: ${Object.keys(cleanOrg)}, VALS: ${Object.values(cleanOrg)}`)
                 writeDataToDB(Object.keys(cleanOrg),Object.values(cleanOrg));
             }
 
@@ -48,25 +47,17 @@ writeDataToDB = async (columnNames, value) => {
     const query = `INSERT INTO public.charities
     (
         ${columnNames[0]}, ${columnNames[1]}, ${columnNames[2]},
-        ${columnNames[3]}, ${columnNames[4]}, ${columnNames[5]},
-        ${columnNames[6]}
-    ) VALUES($1,$2,$3,$4,$5,$6,$7)`;
-    
-
-    // await db.query(query,value ,(err,res) => {
-    //     if(err) console.log('ERROR: ',err)
-    // })
-
+        ${columnNames[3]}, ${columnNames[4]}, ${columnNames[5]}
+    ) VALUES($1,$2,$3,$4,$5,$6)`;
     
     const PG_URI = 'postgres://tuvajlhz:0B3hf6CGsyuCOLtTVBAdCiirBkXFYN2S@heffalump.db.elephantsql.com/tuvajlhz';
     const pool = new Pool({
     connectionString: PG_URI
     });
-    ;(async function() {
+
     const client = await pool.connect()
     await client.query(query, value)
     client.release()
-    })()
 }
 
 module.exports = charityAPIController;

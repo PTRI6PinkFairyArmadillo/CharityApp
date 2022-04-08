@@ -27,7 +27,6 @@ CREATE TABLE public.charities (
     "name" varchar NOT NULL,
     "city" varchar NOT NULL,
     "country" varchar NOT NULL,
-    "logoUrl" varchar NOT NULL,
     "url" varchar NOT NULL,
     "mission" varchar NOT NULL,
     "ein" varchar NOT NULL
