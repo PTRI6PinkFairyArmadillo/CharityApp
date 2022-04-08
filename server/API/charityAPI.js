@@ -7,7 +7,7 @@ const { Pool } = require('pg')
 
 const charityAPIController = {};
 
-charityAPIController.getCharities = async (req,res,next) => {
+charityAPIController.loadCharities = async (req,res,next) => {
     const PostgreSQLColumns = ['name','city','country','url','mission','ein'];
 
     try {
@@ -19,7 +19,7 @@ charityAPIController.getCharities = async (req,res,next) => {
         .then(res => res.text())
         .then(str => 
             parseString(str, (err,data) => {
-            if(err) return console.log('charityAPIController.getCharities ERROR: ',err)
+            if(err) return console.log('charityAPIController.loadCharities ERROR: ',err)
             const orgs = data.organizations.organization;
             
             for(let j = 0; j < orgs.length; j++){
@@ -36,12 +36,34 @@ charityAPIController.getCharities = async (req,res,next) => {
         next();
     } catch (err) {
         return next({
-            log: `charityAPIController.getCharities: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
+            log: `charityAPIController.loadCharities: ERROR: ${typeof err === 'object' ? JSON.stringify(err) : err}`,
           message: {
-            err: 'charityAPIController.getCharities: ERROR: Check server logs for details'
+            err: 'charityAPIController.loadCharities: ERROR: Check server logs for details'
         }})
     }
 }
+
+
+charityAPIController.getCharities = async (req, res, next) => {
+
+    const query = `
+      SELECT
+      *
+      FROM
+      public.charities
+    `;
+
+    console.log('IN GETCHARITIES METHOD')
+
+    db.query(query, [], (error, response) => {
+        if (!response.rows.length) return next({
+            log: `charityAPI.getCharities: ERROR: No charities found in DB`,
+        });
+        res.locals.charities = response.rows;
+        return next();
+    })
+}
+
 
 writeDataToDB = async (columnNames, value) => {
     const query = `INSERT INTO public.charities

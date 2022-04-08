@@ -7,6 +7,7 @@ const cors = require('cors');
 const dashboardRouter = require('./routers/dashboardRouter.js');
 const plaid = require('plaid');
 const bankRouter = require('./routers/bankRouter.js');
+const charityRouter = require('./routers/charityRouter.js')
 const app = express();
 const port = 3001;
 
@@ -22,7 +23,7 @@ app.use('/loginSignUp', userRouter);
 app.use('/dashboard', dashboardRouter)
 app.use('/banks', bankRouter)
 
-app.use('/charityAPI',require('./routers/charity'));
+app.use('/charityAPI', charityRouter);
 
 
 //bank connection endpoint
