@@ -1,36 +1,4 @@
-.Collapsible {
-    text-align: center;
-    border-radius: 7px;
-    padding: 5px;
-    background-color: rgba(255, 192, 206, .7);
-    color: #4f4f4f;
-    margin: 10px;
-  }
-  .pTag {
-    padding: 8px;
-    border-radius: 7px;
-  }
-  .Collapsible__trigger {
-    font-size: 20px;
-  }
-  .collapsibleContainer{
-    width: 70%;
+.backtoDashboard {
+    background: linear-gradient(#23a6d5, #23d5ab);
     height: 100%;
-  }
-  .accNumber{
-    display: inline;
-  }
-  .button {
-    padding: 5px 20px;
-    margin: 5px 5px 15px 5px;
-    background-color: rgb(247, 247, 247);
-    color: #4f4f4f;
-    border: 1px solid #4f4f4f;
-    border-radius: 10px;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  .deleteButton:hover{
-    background-color: #f55353;
-    color: rgb(247, 247, 247);
-  }
+}
