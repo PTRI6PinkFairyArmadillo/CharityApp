@@ -109,4 +109,21 @@ bankController.getBankInfo = async (req, res, next) => {
   };
 };
 
+bankController.deleteUserBank = async (req, res, next) => {
+  const decodedId = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+
+  const query = `
+  DELETE FROM
+  public.user_bank_accounts
+  WHERE
+  user_id = $1
+  `;
+
+  try {
+    const response = await db.query(query, [decodedId])
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 module.exports = bankController;

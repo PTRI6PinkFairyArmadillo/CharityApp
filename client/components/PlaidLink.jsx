@@ -73,6 +73,15 @@ const PlaidApp = () => {
     .then(data => console.log(data))
   };
 
+  const handleDeleteBank = () => {
+    fetch('/banks/delete', {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+  };
+ 
   return (
     <div>
       {
@@ -95,6 +104,7 @@ const PlaidApp = () => {
             <button onClick={handleId}>Get Identity</button>
             <button onClick={handleBalance}>Get Balance</button>
             <button onClick={handleGetBank}>Get Banks</button>
+            <button onClick={handleDeleteBank}>Delete Banks</button>
           </div>
           :
           <></>
