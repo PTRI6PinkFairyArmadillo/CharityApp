@@ -22,6 +22,9 @@ app.use('/loginSignUp', userRouter);
 app.use('/dashboard', dashboardRouter)
 app.use('/banks', bankRouter)
 
+app.use('/charityAPI',require('./routers/charity'));
+
+
 //bank connection endpoint
 //charity dashboard endpoint (might need separate for charity api)
 
