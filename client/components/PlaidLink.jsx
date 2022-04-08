@@ -67,6 +67,12 @@ const PlaidApp = () => {
       .catch(err => console.log(err))
   };
 
+  const handleGetBank = () => {
+    fetch('/banks')
+    .then(res => res.json())
+    .then(data => console.log(data))
+  };
+
   return (
     <div>
       {
@@ -88,6 +94,7 @@ const PlaidApp = () => {
             <button onClick={handleTransaction}>Get Transaction</button>
             <button onClick={handleId}>Get Identity</button>
             <button onClick={handleBalance}>Get Balance</button>
+            <button onClick={handleGetBank}>Get Banks</button>
           </div>
           :
           <></>

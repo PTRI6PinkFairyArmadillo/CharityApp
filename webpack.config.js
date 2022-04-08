@@ -44,6 +44,11 @@ module.exports = {
         secure: false,
         changeOrigin: true,
       },
+      '/banks': {
+        target: 'http://localhost:3001',
+        secure: false,
+        changeOrigin: true,
+      },
     },
   },
   module: {

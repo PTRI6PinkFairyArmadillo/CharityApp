@@ -8,8 +8,10 @@ const dashboardRouter = require('./routers/dashboardRouter.js');
 const plaid = require('plaid');
 const bankRouter = require('./routers/bankRouter.js');
 const app = express();
+const cookieParser = require('cookie-parser');
 const port = 3001;
 
+app.use(cookieParser());
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -19,8 +21,8 @@ app.use(cors());
 
 app.use('/plaid', plaidRouter);
 app.use('/loginSignUp', userRouter);
-app.use('/dashboard', dashboardRouter)
-app.use('/banks', bankRouter)
+app.use('/dashboard', dashboardRouter);
+app.use('/banks', bankRouter);
 
 //bank connection endpoint
 //charity dashboard endpoint (might need separate for charity api)
