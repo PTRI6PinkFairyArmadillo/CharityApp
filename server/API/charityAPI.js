@@ -53,8 +53,6 @@ charityAPIController.getCharities = async (req, res, next) => {
       public.charities
     `;
 
-    console.log('IN GETCHARITIES METHOD')
-
     db.query(query, [], (error, response) => {
         if (!response.rows.length) return next({
             log: `charityAPI.getCharities: ERROR: No charities found in DB`,
@@ -66,6 +64,7 @@ charityAPIController.getCharities = async (req, res, next) => {
 
 
 writeDataToDB = async (columnNames, value) => {
+    console.log('VALUE', value)
     const query = `INSERT INTO public.charities
     (
         ${columnNames[0]}, ${columnNames[1]}, ${columnNames[2]},

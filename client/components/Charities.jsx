@@ -6,18 +6,30 @@ import { useNavigate } from 'react-router-dom';
 const Charities = (props) => {
   let navigate = useNavigate();
 
-  //call to load charity data from API to db
-  fetch('/charityAPI/load', {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
-  })  
-    // .then(data => console.log(data))
-    .catch(err => console.log('error in Charities.jsx fetch', err))
-
-  //state hook for sourceAccount, used if we navigate back to account page
-  const [sourceAccount, deleteSourceAccount] = useState(props.sourceAccount);
+  
+  //state hook for charity data pulled from db in useEffect
   const [charities, setCharities] = useState([]);
   
+  //make fetch request to pull charities data from db
+    useEffect (() => {
+      fetch('/charityAPI/getFromDB')
+      .then(response => response.json())
+      .then(data => {
+          setCharities(data);
+          console.log('here',charities)
+          if(!data.length) {
+              // //call to load charity data from API to db
+              fetch('/charityAPI/load', {
+                  method: 'GET',
+                  headers: { 'Content-Type': 'application/json' },
+                })
+                .catch(err => console.log('error in Charities.jsx fetch', err))
+            }
+        });
+          },[]);
+        
+    //state hook for sourceAccount, used if we navigate back to account page
+    const [sourceAccount, deleteSourceAccount] = useState(props.sourceAccount);
   
   //navigate back to banks page
   const backToAccounts = (e) => {
@@ -35,18 +47,7 @@ const Charities = (props) => {
     deleteSourceAccount(null);
   }
 
-
-  //make fetch request to pull charities data from db
-  useEffect (() => {
-    console.log('STARTING FETCH FROM DB')
-    fetch('/charityAPI/getFromDB')
-    .then(response => response.json())
-    .then(data => setCharities(data))  
-  });  
-
-//   console.log(`AFTER GET, CHARITIES: ${JSON.stringify(charities)}`)
-
-  // creating the table of charities
+  // upoon clicking Donate! send the user back to the dashboard
   const routeChange = () =>{ 
     let path = `localhost:8080`; 
     navigate(path);
@@ -56,7 +57,6 @@ const Charities = (props) => {
     return (
       charities.map((k,i) => {
         let charity = charities[i];
-        console.log('CHARITY',charity);
         return (
           <tr key={i} className='table--charityRow'>
             <td>{i}</td>
@@ -92,8 +92,6 @@ const Charities = (props) => {
         </div>
       </div>
   )
-  
-  
 }
 
 
