@@ -15,14 +15,8 @@ const Bank = (props) => {
     }
 
     return (
-<<<<<<< HEAD
-      <div>
-        <button className='backtoDashboard' onClick={backToDashboard}>Back To Dashboard</button>
-        <PlaidLink></PlaidLink>
-=======
       <div  className='backtoDashboard' >
         <button onClick={backToDashboard}  className="buttonNav">dashboard</button>
->>>>>>> jwt
         <Collapsible trigger="Bofa 2748">
           <div className="pTag">
               <h3>Bank of America</h3>
