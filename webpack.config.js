@@ -54,11 +54,6 @@ module.exports = {
         secure: false,
         changeOrigin: true,
       },
-      '/dashboard': {
-        target: 'http://localhost:3001',
-        secure: false,
-        changeOrigin: true,
-      },
     },
   },
   module: {

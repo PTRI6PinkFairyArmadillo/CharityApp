@@ -7,7 +7,7 @@ router.get('/', bankController.getBankInfo, (req, res) => {
 });
 
 router.delete('/delete', bankController.deleteUserBank, (req, res) => {
-  return res.json('success');
+  return res.json(res.locals.success);
 });
 
 module.exports = router;
