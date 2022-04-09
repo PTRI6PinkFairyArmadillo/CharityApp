@@ -8,6 +8,7 @@
 }
 .banks {
     min-height: 400px;
+    padding: 60px;
 }
 .footerBank {
     width: 100%;
@@ -15,4 +16,19 @@
     color: #fff;
     padding: 20px 0 20px;
     background-color: #004ba7;
-  }
+}
+.row {
+    background-color: rgba(0, 75, 167, 0.9);
+}
+.wholeRow {
+    min-height: 300px;
+    display: flex;
+    padding: 75px;
+    text-align: center;
+    color: #fff;
+}
+.charities--table {
+    padding: 60px;
+}
+
+

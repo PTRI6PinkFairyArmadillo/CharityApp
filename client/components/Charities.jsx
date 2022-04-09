@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import Collapsible from 'react-collapsible';
 //props needed: sourceAccount (from banks page)
 
 const Charities = (props) => {
@@ -36,65 +36,75 @@ const Charities = (props) => {
         
     //state hook for sourceAccount, used if we navigate back to account page
     const [sourceAccount, deleteSourceAccount] = useState(props.sourceAccount);
-  
-  //navigate back to banks page
-  const backToAccounts = (e) => {
-    e.preventDefault();
-    navigate('/dashboard/banks');
-    deleteSourceAccount(null);
-  }
-  
-  //cancel option
-  const backToDashboard = (e) => {
-    //need to remove existing donation workflow state (ie 'source-bank-account')
 
-    e.preventDefault();
-    navigate('/dashboard');
-    deleteSourceAccount(null);
-  }
-
-  // upoon clicking Donate! send the user back to the dashboard
-  const routeChange = () =>{ 
-    let path = `localhost:8080`; 
-    navigate(path);
-  }
-    
+  
   function Rows(){
     return (
       charities.map((k,i) => {
         let charity = charities[i];
         return (
-          <tr key={i} className='table--charityRow'>
-            <td>{i}</td>
-            <td>{charity.name}</td>
-            <td>{charity.city}</td>
-            <td>{charity.country}</td>
-            <td>{charity.mission}</td>
-            <td className="table--link">
-              Link: {charity.url}
-            </td>
-            <td>{charity.ein}</td>
-            <td>
-              <button type='submit' className="table--charitySaveButton" onClick={() => {routeChange}}>Donate!</button>
-            </td>
-          </tr>
+          <Collapsible key={i} trigger={`${charity.name}`}>
+          <div className="pTag">
+            <h4>{charity.mission}</h4>
+            <div>
+            <p className="accNumber">Name:</p><h4 className="accNumberCharity">{charity.name}</h4> 
+            <p className="accNumber">City:</p><h4 className="accNumberCharity">{charity.city}</h4> 
+            <p className="accNumber">Country:</p><h4 className="accNumberCharity">{charity.country}</h4> 
+            </div>
+            <br></br>
+            <hr></hr>
+            <br></br>
+            <h4 className="accNumberCharity">Please choose donate amount</h4>
+            <input style={{border: '1px solid white', borderRadius: '7px'}} type='text'></input>
+            <br></br>
+            <button className="buttonNavBank" onClick={(e) => {
+              e.preventDefault()
+              alert('Thank you for your donation!')
+              window.location.href = '/dashboard'
+            }}>Donate</button>
+          </div>
+        </Collapsible>
+
         )
       })
     );
   }
-  const header = ['name','city','country','url','mission','ein'];
+  const header = [' '];
   return (
       <div>
+        <div className='bankNav'>
+        <button className="buttonNavBank" onClick={(e) => {
+                  e.preventDefault();
+                  navigate('/dashboard/banks');
+                  deleteSourceAccount(null);
+            }}>Back to Accounts</button>
+        </div>
+        <div>
         <table className='charities--table'>
             <thead>
                 <tr>{header.map((e,i) => <th key={i}>{e}</th>)}</tr>
             </thead>
-            <tbody>
+            <tbody className='charities'>
                 {Rows()}
             </tbody>
         </table>
+        </div>
         <div>
-            <button onClick={() => backToAccounts(e)}>Back to Accounts</button>
+            
+            <div className='footerBank'>
+                <div className='box'>
+                        <h3>Team Name: Pink Fairy Armadillo</h3>
+                    </div>
+                    <div className='box'>
+                        <h3>Team:</h3>
+                        <p>Sigele Nickerson-Adams</p>
+                        <p>Javan Ang</p>
+                        <p>Josh Merrell</p>
+                        <p>Nathan Crawford</p>
+                        <p>Milos Popovic</p>
+                    </div>
+
+                </div>
         </div>
       </div>
   )

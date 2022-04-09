@@ -11,7 +11,7 @@ charityAPIController.loadCharities = async (req,res,next) => {
     const PostgreSQLColumns = ['name','city','country','url','mission','ein'];
 
     try {
-        fetch('https://api.globalgiving.org/api/public/orgservice/all/organizations/active?api_key=57c25a2c-f4d8-47b2-add7-cd2e316adb3e', {
+        fetch('https://api.globalgiving.org/api/public/orgservice/all/organizations?api_key=57c25a2c-f4d8-47b2-add7-cd2e316adb3e', {
             'headers': {
             'Accept': 'application/xml',
             'Content-Type': 'application/xml'
