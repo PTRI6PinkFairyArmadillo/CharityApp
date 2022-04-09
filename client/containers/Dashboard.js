@@ -58,17 +58,17 @@ export const dataBar = [
   export const optionsBar = {
     backgroundColor: { fill:'transparent' },
     chart: {
-      title: "Company Performance",
-      subtitle: "Sales, Expenses, and Profit: 2014-2017"
+      title: "Donation amounts per year",
+      subtitle: "Checking and Savings, Credit Cards, and Profit: 2014-2017"
     }
   };
   export const dataPie = [
     ["CHARITY", "AMOUNT"],
-    ["FOR GREENER FUTURE", 11],
-    ["HUNGRY CHILDREN", 2],
-    ["RECYCLE ME2DAY", 2],
-    ["28JUN", 2],
-    ["CAR FOR ALL", 7],
+    ["Samadhan", 11],
+    ["Carolina for Kibera, Inc.", 2],
+    ["The River Fund", 2],
+    ["Tewa", 2],
+    ["Instituto Dara", 7],
   ];
   export const optionsPie = {
     backgroundColor: { fill:'transparent' },
@@ -76,16 +76,16 @@ export const dataBar = [
   };
 
   export const dataChart = [
-    ["Year", "Sales", "Expenses"],
-    ["2013", 1000, 400],
-    ["2014", 1170, 460],
-    ["2015", 660, 1120],
-    ["2016", 1030, 540],
+    ["Month", "Checking accounts", "Credit Cards"],
+    ["January", 1000, 400],
+    ["February", 1170, 460],
+    ["March", 660, 1120],
+    ["April", 1030, 540],
   ];
   
   export const optionsChart = {
     backgroundColor: { fill:'transparent' },
-    title: "Company Performance",
+    title: "Total donations",
     hAxis: { title: "Year", titleTextStyle: { color: "#333" } },
     vAxis: { minValue: 0 },
     chartArea: { width: "50%", height: "70%" },
@@ -151,7 +151,7 @@ const Dashboard = (props) => {
                 <article class="card">
                       <div class="modest-vid-embed modest-vid-embed--auto">
                         <div class="modest-vid-embed__wrapper">
-                          <iframe class="modest-vid-embed__item" style={{width: '100%', height: '55%'}}src="https://www.youtube.com/embed/BQ0mxQXmLsk?mute=1&autoplay=1&modestbranding=1&loop=1&rel=0&amp;controls=0&amp;showinfo=0&playlist=E1xkXZs0cAQ" frameborder="0" allowfullscreen></iframe>
+                          <iframe className="modest-vid-embed__item" style={{width: '100%', height: '55%'}}src="https://www.youtube.com/embed/BQ0mxQXmLsk?mute=1&autoplay=1&modestbranding=1&loop=1&rel=0&amp;controls=0&amp;showinfo=0&playlist=E1xkXZs0cAQ" frameborder="0" allowfullscreen></iframe>
                         </div>
                       </div>
                     </article>
@@ -200,7 +200,7 @@ const Dashboard = (props) => {
                       )}
                       {!hidden3 && (
                     <div className="chartNav">
-                    <button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button><button className="buttonNav" onClick={(e) => props.logout(e)}>signout</button>
+                    <button className="buttonNav"  onClick={() => changeTotal('block')}>total</button><button className="buttonNav" onClick={() => changeYtd('block')}>ytd</button>
 
                     <div className="charts">
                     <div className="total" style={{display: state.total}}>
@@ -230,8 +230,8 @@ const Dashboard = (props) => {
                     )}
                       {!hidden4 && (
                        <div className='center'>
-                        <h3>"Charity App helped me and my family to open the first store in our village"</h3>
-                        <p>Hanh Nguyen, Vietnam</p>
+                        <h3>"Charity App helped me payoff my Codesmith tuition."</h3>
+                        <p>Javan Ang, Malaysia</p>
                       </div>
                       )}
                     </div>
@@ -274,7 +274,7 @@ const Dashboard = (props) => {
                 </div>
                 <div>
                 
-                    <div>
+                <div>
                         <Popup
                         modal
                         className="test" overlayStyle={{ background: "rgba(255,255,255,0.98"}}
@@ -282,7 +282,7 @@ const Dashboard = (props) => {
                         closeOnDocumentClick={false}
                         trigger={open => <BurgerIcon open={open} />}
                         >
-                        {close => <Menu close={close} />}
+                        {close => <Menu logout={props.logout} close={close} />}
                         </Popup>
 
                     </div>

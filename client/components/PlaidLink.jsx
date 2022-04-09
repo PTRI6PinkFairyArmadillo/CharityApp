@@ -103,8 +103,8 @@ const PlaidApp = (props) => {
       }
       {
         linkToken && accessToken ?
-          <div>
-            <button className='buttonNav' onClick={handleAuth}>Connect Banks</button>
+          <div className='plaidButton'>
+            <button className='buttonNavBank' onClick={handleAuth}>Connect Banks</button>
             {/* <button onClick={handleTransaction}>Get Transaction</button>
             <button onClick={handleBalance}>Get Balance</button>
             <button onClick={handleGetBank}>Get Banks</button>

@@ -1,24 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-export default ({ close }) => (
+export default (props) => (
+  
   <div className="menu">
-    <ul>
-      {/* <li>
-        <NavLink onClick={close} activeClassName="current" to="/">
-          Home
-        </NavLink>
-      </li> */}
-      <li>
-        <NavLink onClick={close} activeClassName="current" to="addBank">
-          Add Bank
-        </NavLink>
-      </li>
-      <li>
-        <NavLink onClick={close} activeClassName="current" to="contributions">
-          Contributions
-        </NavLink>
-      </li>
-    </ul>
+  <button className="buttonNav" onClick={(e) => {
+    e.preventDefault()
+    props.logout(e)}}>signout</button>
   </div>
 );

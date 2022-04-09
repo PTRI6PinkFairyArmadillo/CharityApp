@@ -46,11 +46,9 @@ export class Login extends Component {
                   </div>
                   <div className="form">
                     <div className="form-group">
-                      <label htmlFor="username">Username</label>
                       <input onChange={(e) => this.setState({ username: e.target.value })} e="text" name="username" placeholder="username" />
                     </div>
                     <div className="form-group">
-                      <label htmlFor="password">Password</label>
                       <input onChange={(e) => this.setState({ plainPassword: e.target.value })} type="password" name="password" placeholder="password" />
                     </div>
                   </div>

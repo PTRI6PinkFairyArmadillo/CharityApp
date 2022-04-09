@@ -59,7 +59,7 @@ const Charities = (props) => {
             <br></br>
             <button className="buttonNavBank" onClick={(e) => {
               e.preventDefault()
-              alert('Thank you for your donation!')
+              alert('Thank you for donating to Pink Fairy Armadillo charity for students in need!')
               window.location.href = '/dashboard'
             }}>Donate</button>
           </div>
