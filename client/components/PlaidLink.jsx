@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
 
-const PlaidApp = () => {
+
+const PlaidApp = (props) => {
   const [linkToken, setLinkToken] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
   const [itemId, setItemId] = useState(null);
@@ -27,7 +28,10 @@ const PlaidApp = () => {
       body: JSON.stringify({ accessToken })
     })
       .then(res => res.json())
-      .then(data => console.log(data))
+      .then(data => {
+        console.log(data);
+        props.updated ? props.setUpdated(false) : props.setUpdated(true);
+      })
       .catch(err => console.log(err))
   };
 
@@ -68,9 +72,9 @@ const PlaidApp = () => {
   };
 
   const handleGetBank = () => {
-    fetch('/banks')
-    .then(res => res.json())
-    .then(data => console.log(data))
+    fetch('plaid/banks')
+      .then(res => res.json())
+      .then(data => console.log(data))
   };
 
   const handleDeleteBank = () => {
@@ -78,20 +82,21 @@ const PlaidApp = () => {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
     })
-    .then(res => res.json())
-    .then(data => console.log(data))
+      .then(res => res.json())
+      .then(data => console.log(data))
   };
- 
+
   return (
     <div>
       {
-        linkToken && !accessToken ?
+        linkToken ?
           <Link
             linkToken={linkToken}
             accessToken={accessToken}
             itemId={itemId}
             setAccessToken={setAccessToken}
             setItemId={setItemId}
+            handleAuth={handleAuth}
           />
           :
           <>No Public Token</>
@@ -99,12 +104,11 @@ const PlaidApp = () => {
       {
         linkToken && accessToken ?
           <div>
-            <button onClick={handleAuth}>Get Auth</button>
-            <button onClick={handleTransaction}>Get Transaction</button>
-            <button onClick={handleId}>Get Identity</button>
+            <button className='buttonNav' onClick={handleAuth}>Connect Banks</button>
+            {/* <button onClick={handleTransaction}>Get Transaction</button>
             <button onClick={handleBalance}>Get Balance</button>
             <button onClick={handleGetBank}>Get Banks</button>
-            <button onClick={handleDeleteBank}>Delete Banks</button>
+            <button onClick={handleDeleteBank}>Delete Banks</button> */}
           </div>
           :
           <></>
@@ -126,17 +130,18 @@ const Link = (props) => {
       .then(data => {
         props.setItemId(data.itemId);
         props.setAccessToken(data.accessToken);
-        return
       })
   }, []);
+
   const config = {
     token: props.linkToken,
     onSuccess,
   };
+
   const { open, ready } = usePlaidLink(config);
   return (
-    <button onClick={() => open()} disabled={!ready}>
-      Link account
+    <button className='buttonNavBank' onClick={() => open()} disabled={!ready}>
+      plaid-login
     </button>
   );
 };

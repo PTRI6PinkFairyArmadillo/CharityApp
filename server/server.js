@@ -24,7 +24,6 @@ app.use('/plaid', plaidRouter);
 app.use('/loginSignUp', userRouter);
 app.use('/dashboard', dashboardRouter);
 app.use('/banks', bankRouter);
-
 app.use('/charityAPI', charityRouter);
 
 

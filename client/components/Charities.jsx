@@ -23,6 +23,8 @@ const Charities = (props) => {
                   method: 'GET',
                   headers: { 'Content-Type': 'application/json' },
                 })
+                .then(response => response.json())
+                .then(data => setCharities(data))
                 .catch(err => console.log('error in Charities.jsx fetch', err))
             }
         });

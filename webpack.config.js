@@ -42,7 +42,7 @@ module.exports = {
       '/plaid': {
         target: 'http://localhost:3001',
         secure: false,
-        changeOrigin: true
+        changeOrigin: true,
       },
       '/charityAPI': {
         target: 'http://localhost:3001',
@@ -50,11 +50,6 @@ module.exports = {
         changeOrigin: true,
       },
       '/banks': {
-        target: 'http://localhost:3001',
-        secure: false,
-        changeOrigin: true,
-      },
-      '/dashboard': {
         target: 'http://localhost:3001',
         secure: false,
         changeOrigin: true,

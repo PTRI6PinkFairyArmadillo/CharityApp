@@ -61,6 +61,7 @@ plaidController.getAccessToken = async (req, res, next) => {
 
 plaidController.getBankInfo = async (req, res, next) => {
   const access_token = req.body.accessToken;
+  console.log(access_token);
   try {
     const authResponse = await client.authGet({
       access_token,

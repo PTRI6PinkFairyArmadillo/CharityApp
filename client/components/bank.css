@@ -1,4 +1,18 @@
 .backtoDashboard {
-    background: linear-gradient(#23a6d5, #23d5ab);
     height: 100%;
 }
+.bankNav {
+    display: flex;
+    justify-content: center;
+    background-color: #004ba7;
+}
+.banks {
+    min-height: 400px;
+}
+.footerBank {
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    padding: 20px 0 20px;
+    background-color: #004ba7;
+  }

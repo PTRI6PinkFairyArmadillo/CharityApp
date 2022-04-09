@@ -111,16 +111,24 @@ bankController.getBankInfo = async (req, res, next) => {
 
 bankController.deleteUserBank = async (req, res, next) => {
   const decodedId = jwt.verify(req.cookies.jwt, process.env.ACCESS_TOKEN_SECRET);
+  const { _id } = req.body;
 
   const query = `
   DELETE FROM
   public.user_bank_accounts
   WHERE
   user_id = $1
+  AND
+  bank_account_id = $2
   `;
 
   try {
-    const response = await db.query(query, [decodedId])
+    const response = await db.query(query, [decodedId, _id]);
+    if (response.rowCount === 1) {
+      res.locals.success = true;
+    }
+    else res.locals.success = false;
+    next();
   } catch (error) {
     console.log(error);
   }
