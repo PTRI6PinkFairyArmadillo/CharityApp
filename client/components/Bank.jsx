@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import Collapsible from 'react-collapsible';
 import './bank.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import PlaidLink from './PlaidLink'
 
 
@@ -14,6 +14,11 @@ const Bank = (props) => {
   const backToDashboard = (e) => {
     e.preventDefault();
     navigate('/dashboard')
+  }
+
+  const toCharities = (e) => {
+    e.preventDefault();
+    navigate('/dashboard/charities');
   }
 
   //make fetch request to pull charities data from db
@@ -54,7 +59,7 @@ const Bank = (props) => {
                 <h4 className="accNumber">Account number:</h4> <p className="accNumber">{row.account_number}</p>
               </div>
               <br></br>
-              <button className="buttonNav">Donate</button>
+              <button className="buttonNav" onClick={toCharities}>Donate</button>
               <button className='buttonNav' onClick={() => handleDeleteBank(row)}>Delete</button>
             </div>
           </Collapsible>
