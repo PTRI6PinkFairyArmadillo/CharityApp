@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePlaidLink } from 'react-plaid-link';
 
+
 const PlaidApp = () => {
   const [linkToken, setLinkToken] = useState(null);
   const [accessToken, setAccessToken] = useState(null);
@@ -68,7 +69,7 @@ const PlaidApp = () => {
   };
 
   const handleGetBank = () => {
-    fetch('/banks')
+    fetch('plaid/banks')
     .then(res => res.json())
     .then(data => console.log(data))
   };
@@ -101,7 +102,6 @@ const PlaidApp = () => {
           <div>
             <button onClick={handleAuth}>Get Auth</button>
             <button onClick={handleTransaction}>Get Transaction</button>
-            <button onClick={handleId}>Get Identity</button>
             <button onClick={handleBalance}>Get Balance</button>
             <button onClick={handleGetBank}>Get Banks</button>
             <button onClick={handleDeleteBank}>Delete Banks</button>
@@ -135,8 +135,8 @@ const Link = (props) => {
   };
   const { open, ready } = usePlaidLink(config);
   return (
-    <button onClick={() => open()} disabled={!ready}>
-      Link account
+    <button className='buttonNav' onClick={() => open()} disabled={!ready}>
+      Connect Plaid
     </button>
   );
 };
