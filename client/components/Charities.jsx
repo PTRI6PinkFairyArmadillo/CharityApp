@@ -9,6 +9,7 @@ const Charities = (props) => {
   
   //state hook for charity data pulled from db in useEffect
   const [charities, setCharities] = useState([]);
+  const [loading, setLoading] = useState(false)
   
   //make fetch request to pull charities data from db
     useEffect (() => {
@@ -16,7 +17,7 @@ const Charities = (props) => {
       .then(response => response.json())
       .then(data => {
           setCharities(data);
-          console.log('here',charities)
+          console.log('here',charities);
           if(!data.length) {
               // //call to load charity data from API to db
               fetch('/charityAPI/load', {
@@ -24,11 +25,14 @@ const Charities = (props) => {
                   headers: { 'Content-Type': 'application/json' },
                 })
                 .then(response => response.json())
-                .then(data => setCharities(data))
+                .then(data => {
+                  console.log(data);
+                  setLoading(true)
+                })
                 .catch(err => console.log('error in Charities.jsx fetch', err))
             }
         });
-          },[]);
+          },[loading]);
         
     //state hook for sourceAccount, used if we navigate back to account page
     const [sourceAccount, deleteSourceAccount] = useState(props.sourceAccount);
