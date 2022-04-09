@@ -54,9 +54,9 @@ charityAPIController.getCharities = async (req, res, next) => {
     `;
 
     db.query(query, [], (error, response) => {
-        if (!response.rows.length) return next({
-            log: `charityAPI.getCharities: ERROR: No charities found in DB`,
-        });
+        // if (!response.rows.length) return next({
+        //     log: `charityAPI.getCharities: ERROR: No charities found in DB`,
+        // });
         res.locals.charities = response.rows;
         return next();
     })
